@@ -3,42 +3,42 @@ require('./more.css');
 require('../lib/swiper.min.css');
 let Swiper = require('../lib/swiper.min.js');
 let jsonp = require('../util/jsonp.js');
-import React from 'react'; 
+import React from 'react';
 
 var More = React.createClass({
-	getInitialState: function() {
-        return {
-        	more1: [],
-        	more2: [],
-        	more3: [],
-        };
- 	},
+	getInitialState: function () {
+		return {
+			more1: [],
+			more2: [],
+			more3: [],
+		};
+	},
 
-	componentDidMount: function() {
+	componentDidMount: function () {
 		jsonp(this.props.source, "", "callback", (data) => {
-			if(data.status) {
+			if (data.status) {
 
-				if(this.isMounted()) {
+				if (this.isMounted()) {
 					this.setState({
-						more1: data.data.slice(0,3),
-						more2: data.data.slice(3,5),
-						more3: data.data.slice(5,7),
+						more1: data.data.slice(0, 3),
+						more2: data.data.slice(3, 5),
+						more3: data.data.slice(5, 7),
 					})
-				    new Swiper ('.more_bottom .swiper-container', {
-					    loop: true,
-					    pagination: '.swiper-pagination',
-					    paginationClickable: true,
-					    autoplay : 2000,
-						autoplayDisableOnInteraction : false,		    
-					}) 
+					new Swiper('.more_bottom .swiper-container', {
+						loop: true,
+						pagination: '.swiper-pagination',
+						paginationClickable: true,
+						autoplay: 2000,
+						autoplayDisableOnInteraction: false,
+					})
 				}
-			}else {
+			} else {
 				alert(data.msg);
 			}
 		});
 	},
 
-	render: function() {
+	render: function () {
 
 		let countId = 0;
 		return (
@@ -47,10 +47,10 @@ var More = React.createClass({
 					{
 						this.state.more1.map((item) => {
 							return <div className="more_link" key={"more" + countId++}>
-										<a href={item.url}>
-											<img src={item.icon} alt=""/>
-										</a>
-									</div>
+								<a href={item.url}>
+									<img src={item.icon} alt="" />
+								</a>
+							</div>
 						})
 					}
 				</div>
@@ -58,10 +58,10 @@ var More = React.createClass({
 					{
 						this.state.more2.map((item) => {
 							return <div className="more_style" key={"more" + countId++}>
-										<a href={item.url}>
-											<img src={item.icon} alt=""/>
-										</a>
-									</div>
+								<a href={item.url}>
+									<img src={item.icon} alt="" />
+								</a>
+							</div>
 						})
 					}
 				</div>
@@ -70,11 +70,11 @@ var More = React.createClass({
 						<div className="swiper-wrapper">
 							{
 								this.state.more3.map((item) => {
-									return  <div className="swiper-slide" key={"more" + countId++}>
-												<a href={item.url}>
-													<img src={item.icon} alt=""/>
-												</a>
-											</div>
+									return <div className="swiper-slide" key={"more" + countId++}>
+										<a href={item.url}>
+											<img src={item.icon} alt="" />
+										</a>
+									</div>
 								})
 							}
 						</div>
